@@ -3,7 +3,11 @@
 #include "math.h"
 
 using namespace std;
-
+/*
+ * @param apex - apex points of the triangle
+ * @param sideLgth - side length of the main triangle
+ * @param order - recursion depth
+ */
 void triangle(GWindow &gw, GPoint apex, double sideLgth, int order);
 
 int main() {
