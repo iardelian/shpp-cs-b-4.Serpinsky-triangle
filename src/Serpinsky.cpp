@@ -15,7 +15,7 @@ int main() {
     int order;
     cout << "Please, enter lenth of triangle side: ";
     cin >> sideLgth;
-    cout << "Please, enter factorial order: ";
+    cout << "Please, enter fractal order: ";
     cin >> order;
     int a = sideLgth/sqrt(3)*2; // double radius of the circumscribed circle
     GWindow gw(a,a);
