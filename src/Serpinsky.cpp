@@ -4,11 +4,11 @@
 
 using namespace std;
 /*
- * @param apex - apex points of the triangle
+ * @param triangleApex - apex points of the triangle
  * @param sideLgth - side length of the main triangle
  * @param order - recursion depth
  */
-void triangle(GWindow &gw, GPoint apex, double sideLgth, int order);
+void triangle(GWindow &gw, GPoint triangleApex, double sideLgth, int order);
 
 int main() {
     int sideLgth;
@@ -26,17 +26,19 @@ int main() {
     return 0;
 }
 
-void triangle(GWindow &gw, GPoint apex, double sideLgth, int order) {
-    if (order == 0){ // when the order is reduced to zero, we draw a simple triangle
-        apex = gw.drawPolarLine(apex, sideLgth, 0);
-        apex = gw.drawPolarLine(apex, sideLgth, 120);
-        apex = gw.drawPolarLine(apex, sideLgth, -120);
+void triangle(GWindow &gw, GPoint triangleApex, double sideLgth, int order) {
+    if (order == 0){ // when the order is reduced (or equal) to zero, we draw a simple triangle
+        triangleApex = gw.drawPolarLine(triangleApex, sideLgth, 0);
+        triangleApex = gw.drawPolarLine(triangleApex, sideLgth, 120);
+        triangleApex = gw.drawPolarLine(triangleApex, sideLgth, -120);
     }else{
-        GPoint apex1(apex.getX(),apex.getY()); // new coordinate of all three new triangles
-        triangle(gw,apex1,sideLgth/2,order-1); // that are drawing recursively (left-right-top)
-        GPoint apex2(apex.getX()+sideLgth/2, apex.getY());
-        triangle(gw,apex2,sideLgth/2,order-1);
-        GPoint apex3(apex.getX()+sideLgth/4, apex.getY()-(sqrt(3)*sideLgth)/4);
-        triangle(gw,apex3,sideLgth/2,order-1);
+        // new coordinate of all three new triangles that are drawing recursively (left-right-top),
+        // and every time fractal order reduced by one
+        GPoint triangleApex1(triangleApex.getX(),triangleApex.getY());
+        triangle(gw,triangleApex1,sideLgth/2,order-1);
+        GPoint triangleApex2(triangleApex.getX()+sideLgth/2, triangleApex.getY());
+        triangle(gw,triangleApex2,sideLgth/2,order-1);
+        GPoint triangleApex3(triangleApex.getX()+sideLgth/4, triangleApex.getY()-(sqrt(3)*sideLgth)/4);
+        triangle(gw,triangleApex3,sideLgth/2,order-1);
     }
 }
